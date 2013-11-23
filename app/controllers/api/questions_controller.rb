@@ -1,5 +1,4 @@
-module Api
-	class QuestionsController <  Api::ProtectedResourceController
+class Api::QuestionsController <  Api::ProtectedResourceController
 
 		def index
 		end
