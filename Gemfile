@@ -9,6 +9,9 @@ gem 'cancan'
 
 gem 'devise'
 
+# Rable for JSON api templating
+gem 'rabl'
+
 group :development, :test do
 	# For debugging
 	gem 'debugger'

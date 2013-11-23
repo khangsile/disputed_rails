@@ -18,14 +18,14 @@ class Api::SessionsController < Api::ProtectedResourceController
 	def facebook_login
 		# token = JSON.parse(request.env['omniauth_token']);
 		# token = fb[:credentials][:token]
-				logger.debug request.headers['OAUTH']
+		logger.debug request.headers['OAUTH']
 		fb_user = FbGraph::User.me(request.headers['OAUTH'])
 
 		logger.debug fb_user.to_yaml
-		if user
+		# if user
 			# @user = User.find_by(email: fb_user.email)
 			# @user.ensure_authentication_token!
-		end
+		# end
 	end
 
 	# Destroy the session by resetting the user's authentication token
