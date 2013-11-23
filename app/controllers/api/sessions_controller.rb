@@ -21,7 +21,7 @@ class Api::SessionsController < Api::ProtectedResourceController
 		logger.debug request.headers['OAUTH']
 		fb_user = FbGraph::User.me(request.headers['OAUTH'])
 
-		logger.debug fb_user.to_yaml
+		logger.info fb_user.to_yaml
 		# if user
 			# @user = User.find_by(email: fb_user.email)
 			# @user.ensure_authentication_token!
