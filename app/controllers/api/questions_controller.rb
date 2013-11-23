@@ -7,8 +7,6 @@ class Api::QuestionsController <  Api::ProtectedResourceController
 			Question.create!(question_params)
 		end
 
-		end
-
 		private
 
 		def question_params
