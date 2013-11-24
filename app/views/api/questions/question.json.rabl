@@ -1,5 +1,5 @@
 object @question
 attributes :content
-child(:answers) do
+child(:answers, object_root: false) do
 	attributes :id, :name
 end
