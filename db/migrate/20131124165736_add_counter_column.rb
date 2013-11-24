@@ -6,7 +6,7 @@ class AddCounterColumn < ActiveRecord::Migration
   		a.update(votes_count: a.votes.length)
   	end
   	Question.find_each do |q|
-  		a.update(votes_count: q.votes.length)
+  		q.update(votes_count: q.votes.length)
   	end
   end
 end
