@@ -6,7 +6,10 @@ class Api::QuestionsController <  Api::ProtectedResourceController
 	end
 
 	def create
-		Question.create!(question_params)
+		@question = Question.create!(question_params)
+		params[:answers].each do |answer|
+			Answer.create!(question_id: @question.id, name: answer)
+		end
 	end
 
 	private
