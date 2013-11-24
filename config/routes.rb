@@ -3,7 +3,7 @@ Disputed::Application.routes.draw do
 
   namespace :api do
     resources :sessions, only: [:create]
-    resources :questions, only: [:index, :create] do
+    resources :questions, only: [:show, :index, :create] do
       resources :answers, only: [] do
         resources :votes, only: :create
       end

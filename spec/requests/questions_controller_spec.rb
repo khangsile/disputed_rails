@@ -25,6 +25,22 @@ describe "QuestionsController" do
 		end
 	end
 
+	describe "#show" do
+		context "when user has voted" do
+			let(:vote) { FactoryGirl.create :vote }
+			it "returns a question with stats" do
+				headers['X-AUTH-TOKEN'] = vote.user.authentication_token
+				get_question(vote.answer.question)
+				body = JSON.parse(response.body)
+				expect(body['question']['answered']).to eq(true)
+				# expect(body).to include 'hello'
+			end
+		end
+	end
+end
+
+def get_question(question)
+	get api_question_path(question), {}, headers
 end
 
 def get_questions
