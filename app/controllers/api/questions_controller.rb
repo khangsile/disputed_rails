@@ -1,6 +1,8 @@
 class Api::QuestionsController <  Api::ProtectedResourceController
+	# before_filter(only: :create) { authenticate_user }
 
 	def index
+		@questions = Question.all
 	end
 
 	def create

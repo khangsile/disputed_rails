@@ -3,6 +3,7 @@ Disputed::Application.routes.draw do
 
   namespace :api do
     resources :sessions, only: [:create]
+    resources :questions, only: [:index, :create]
     post 'facebook_login', to: 'sessions#facebook_login'
   end
   # The priority is based upon order of creation: first created -> highest priority.
