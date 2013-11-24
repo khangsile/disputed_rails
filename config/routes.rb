@@ -3,8 +3,13 @@ Disputed::Application.routes.draw do
 
   namespace :api do
     resources :sessions, only: [:create]
-    resources :questions, only: [:index, :create]
+    resources :questions, only: [:index, :create] do
+      resources :answers, only: [] do
+        resources :votes, only: :create
+      end
+    end
     post 'facebook_login', to: 'sessions#facebook_login'
+
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
