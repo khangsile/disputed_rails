@@ -11,6 +11,7 @@ describe "QuestionsController" do
 			body = JSON.parse(response.body)
 			expect(response).to be_success
 			expect(body.length).to eq(5)
+			expect(response.body).to eq(' ')
 		end
 	end
 

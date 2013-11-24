@@ -2,7 +2,7 @@ class Api::QuestionsController <  Api::ProtectedResourceController
 	before_filter(only: [:user_index]) { authenticate_user }
 
 	def index
-		@questions = Question.all		
+		@questions = Question.all.order(votes_count: :desc)		
 	end
 
 	def show
