@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
 
+  has_many :votes
+  has_many :questions, through: :votes
+
   before_save do
    self.email = self.email.downcase
    self.ensure_authentication_token

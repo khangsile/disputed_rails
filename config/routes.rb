@@ -8,6 +8,9 @@ Disputed::Application.routes.draw do
         resources :votes, only: :create
       end
     end
+    resources :users, only: [] do
+      get 'questions', to: 'questions#user_index', as: 'questions'
+    end
     post 'facebook_login', to: 'sessions#facebook_login'
 
   end

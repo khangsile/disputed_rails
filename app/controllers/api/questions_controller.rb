@@ -1,5 +1,5 @@
 class Api::QuestionsController <  Api::ProtectedResourceController
-	# before_filter(only: :create) { authenticate_user }
+	before_filter(only: [:user_index]) { authenticate_user }
 
 	def index
 		@questions = Question.all		
@@ -7,7 +7,7 @@ class Api::QuestionsController <  Api::ProtectedResourceController
 
 	def show
 		@question = Question.find_by(id: params[:id])
-		logger.info current_user.to_yaml
+		# logger.info current_user.to_yaml
 		# logger.info @question.to_yaml
 		if !current_user.nil? && Vote.find_by(user_id: current_user.id, question_id: params[:id])
 			render 'api/questions/question_with_stats'
@@ -21,6 +21,11 @@ class Api::QuestionsController <  Api::ProtectedResourceController
 		params[:answers].each do |answer|
 			Answer.create!(question_id: @question.id, name: answer)
 		end
+	end
+
+	def user_index
+		@questions = current_user.questions
+		render 'api/questions/index'
 	end
 
 	private

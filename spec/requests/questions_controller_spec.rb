@@ -37,6 +37,24 @@ describe "QuestionsController" do
 			end
 		end
 	end
+
+	describe "#user_index" do
+		it "should get all user's answered questions" do
+			user = FactoryGirl.create(:user)
+			headers['X-AUTH-TOKEN'] = user.authentication_token
+			your_votes = FactoryGirl.create_list(:vote, 5, user: user)
+			not_your_votes = FactoryGirl.create_list(:vote, 5)
+			get_users_questions(user)
+			body = JSON.parse(response.body)
+			# expect(body).to eq(1)
+			expect(body.length).to eq(5)
+		end
+	end
+
+end
+
+def get_users_questions(user)
+	get api_user_questions_path(user), {}, headers
 end
 
 def get_question(question)
