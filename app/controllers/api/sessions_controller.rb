@@ -20,7 +20,7 @@ class Api::SessionsController < Api::ProtectedResourceController
 		# token = fb[:credentials][:token]
 		logger.debug request.headers['OAUTH']
 		fb_user = FbGraph::User.me(request.headers['OAUTH']).fetch
-		# logger.info fb_user.to_yaml
+		logger.info fb_user.to_yaml
 		render_invalid_login and return if fb_user.blank?
 		@user = User.find_by(email: fb_user.email)
 		if @user.nil?
@@ -41,7 +41,7 @@ class Api::SessionsController < Api::ProtectedResourceController
 		fb = user.raw_attributes
 		hometown = fb[:location][:name].split(',')
 		[first_name: fb[:first_name], last_name: fb[:last_name], email: fb[:email],
-			city: hometown[0].strip, state: hometown[1].strip, password: 'changeme']
+			city: hometown[0].strip, state: hometown[1].strip, password: Devise.friendly_token[0,20]]
 	end
 
 
