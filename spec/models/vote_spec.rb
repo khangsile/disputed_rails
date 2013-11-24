@@ -14,4 +14,14 @@ describe Vote do
   		expect(bad_vote).to_not be_valid
   	end
   end
+
+  it "it should increase answer counter" do
+  	user = FactoryGirl.create :user
+  	answer = FactoryGirl.create :answer
+  	Vote.create(user_id: user.id, answer_id: answer.id, question_id: answer.question_id)
+  	answer.reload
+  	expect(answer.votes_count).to eq(1)
+  	expect(answer.question.votes_count).to eq(1)
+  end
+
 end

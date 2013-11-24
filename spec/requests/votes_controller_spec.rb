@@ -16,6 +16,14 @@ describe "VotesController" do
 			expect(response).to be_success
 			expect(response.body).to include('count')
 		end
+
+		it "should increase question's vote count" do
+			expect{create_vote(answer.question,answer)}.to change(answer.question, :votes_count).by(1)
+		end
+
+		it "should increase answer's vote count" do
+			expect{create_vote(answer.question,answer)}.to change(answer,:votes_count).by(1)
+		end
 	end
 
 end

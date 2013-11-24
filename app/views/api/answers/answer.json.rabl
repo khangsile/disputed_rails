@@ -1,5 +1,5 @@
 object @answer
-attributes :id, :name
-node(:count) do |a|
-	a.votes.count
-end
+attributes :id, :name, :votes_count
+# node(:count) do |a|
+# 	a.votes.count
+# end
