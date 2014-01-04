@@ -2,15 +2,16 @@ class Api::QuestionsController <  Api::ProtectedResourceController
 	before_filter(only: [:user_index]) { authenticate_user }
 
 	def index
-		case params[:sort_by]
+		num = 3
+		case params[:sort_by]			
 		# when "trending"
 			# @questions = Question.all.ordered_by_trend
 		when "new"
-			@questions = Question.all.order(created_at: :desc)
+			@questions = Question.all.order(created_at: :desc).page(params[:page]).per(num)
 		when "top"
-			@questions = Question.all.order(votes_count: :desc)
+			@questions = Question.all.order(votes_count: :desc).page(params[:page]).per(num)
 		else
-			@questions = Question.all.ordered_by_trend
+			@questions = Question.all.ordered_by_trend.page(params[:page]).per(num)
 	  end
 	end
 

@@ -9,6 +9,8 @@ gem 'cancan'
 
 gem 'devise'
 
+gem 'kaminari'
+
 # Rable for JSON api templating
 gem 'rabl'
 
