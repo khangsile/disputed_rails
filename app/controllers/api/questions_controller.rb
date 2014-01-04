@@ -18,7 +18,7 @@ class Api::QuestionsController <  Api::ProtectedResourceController
 	def show
 		@question = Question.find_by(id: params[:id])
 		# if user is logged in and user has voted for the question already
-		if !current_user.nil? && Vote.find_by(user_id: current_user.id, question_id: params[:id]).exists?
+		if !current_user.nil? && Vote.find_by(user_id: current_user.id, question_id: params[:id])
 			render 'api/questions/question_with_stats'
 		else
 			render 'api/questions/question'
