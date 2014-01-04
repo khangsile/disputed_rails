@@ -7,6 +7,6 @@ class Question < ActiveRecord::Base
 
 	validate :content, presence: true
 
-	scope :ordered_by_trend, -> { order("hot(votes_count, 0, created_at)") }
-	
+	scope :ordered_by_trend, -> { order("hot(votes_count, 0, created_at) DESC") }
+
 end
