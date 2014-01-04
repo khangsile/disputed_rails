@@ -1,2 +1,2 @@
 collection @questions
-extends('api/questions/question')
+attributes :id, :content, :votes_count

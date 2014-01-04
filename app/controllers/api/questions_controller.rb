@@ -3,7 +3,7 @@ class Api::QuestionsController <  Api::ProtectedResourceController
 
 	def index
 		num = 10
-		case params[:sort_by]			
+		case params[:sort_by]
 		# when "trending"
 			# @questions = Question.all.ordered_by_trend
 		when "new"
@@ -17,7 +17,8 @@ class Api::QuestionsController <  Api::ProtectedResourceController
 
 	def show
 		@question = Question.find_by(id: params[:id])
-		if !current_user.nil? && Vote.find_by(user_id: current_user.id, question_id: params[:id])
+		# if user is logged in and user has voted for the question already
+		if !current_user.nil? && Vote.find_by(user_id: current_user.id, question_id: params[:id]).exists?
 			render 'api/questions/question_with_stats'
 		else
 			render 'api/questions/question'
