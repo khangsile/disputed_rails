@@ -2,13 +2,20 @@ class Api::QuestionsController <  Api::ProtectedResourceController
 	before_filter(only: [:user_index]) { authenticate_user }
 
 	def index
-		@questions = Question.all.order(votes_count: :desc)		
+		case params[:sort_by]
+		# when "trending"
+			# @questions = Question.all.ordered_by_trend
+		when "new"
+			@questions = Question.all.order(created_at: :desc)
+		when "top"
+			@questions = Question.all.order(votes_count: :desc)
+		else
+			@questions = Question.all.ordered_by_trend
+	  end
 	end
 
 	def show
 		@question = Question.find_by(id: params[:id])
-		# logger.info current_user.to_yaml
-		# logger.info @question.to_yaml
 		if !current_user.nil? && Vote.find_by(user_id: current_user.id, question_id: params[:id])
 			render 'api/questions/question_with_stats'
 		else
