@@ -2,7 +2,7 @@ class Api::QuestionsController <  Api::ProtectedResourceController
 	before_filter(only: [:user_index]) { authenticate_user }
 
 	def index
-		num = 3
+		num = 10
 		case params[:sort_by]			
 		# when "trending"
 			# @questions = Question.all.ordered_by_trend
