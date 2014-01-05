@@ -1,5 +1,5 @@
 class Api::QuestionsController <  Api::ProtectedResourceController
-	before_filter(only: [:answered_questions_index,:created_questions_index,:create,:index]) { authenticate_user_from_token! }
+	before_filter(only: [:answered_questions_index,:created_questions_index,:create]) { authenticate_user_from_token! }
 
 	def index
 		num = 10
