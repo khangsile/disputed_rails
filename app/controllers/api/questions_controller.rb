@@ -1,5 +1,5 @@
 class Api::QuestionsController <  Api::ProtectedResourceController
-	before_filter(only: [:user_index]) { authenticate_user }
+	before_filter(only: [:answered_questions_index,:created_questions_index,:create]) { authenticate_user }
 
 	def index
 		num = 10
@@ -26,14 +26,19 @@ class Api::QuestionsController <  Api::ProtectedResourceController
 	end
 
 	def create
-		@question = Question.create!(question_params)
+		@question = current_user.created_questions.create!(question_params)
 		params[:answers].each do |answer|
-			Answer.create!(question_id: @question.id, name: answer)
+			@question.answers.create!(name: answer)
 		end
 	end
 
-	def user_index
+	def answered_questions_index
 		@questions = current_user.questions
+		render 'api/questions/index'
+	end
+
+	def created_questions_index
+		@questions = current_user.created_questions
 		render 'api/questions/index'
 	end
 

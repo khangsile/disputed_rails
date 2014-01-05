@@ -18,11 +18,13 @@ describe "VotesController" do
 		end
 
 		it "should increase question's vote count" do
-			expect{create_vote(answer.question,answer)}.to change(answer.question, :votes_count).by(1)
+			create_vote(answer.question,answer)
+			expect{answer.question.reload}.to change(answer.question, :votes_count).by(1)
 		end
 
 		it "should increase answer's vote count" do
-			expect{create_vote(answer.question,answer)}.to change(answer,:votes_count).by(1)
+			create_vote(answer.question,answer)
+			expect{answer.reload}.to change(answer,:votes_count).by(1)
 		end
 	end
 

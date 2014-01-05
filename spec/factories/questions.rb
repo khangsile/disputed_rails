@@ -3,6 +3,5 @@
 FactoryGirl.define do
   factory :question, :class => 'Question' do
 		sequence(:content) { |n| "Question #{n}?" }
-		sequence(:votes_count) { |n| n }
   end
 end

@@ -3,14 +3,12 @@ Disputed::Application.routes.draw do
 
   namespace :api do
     resources :sessions, only: [:create]
-    resources :questions, only: [:show, :index, :create] do
-      resources :answers, only: [] do
-        resources :votes, only: :create
-      end
-    end
-    resources :users, only: [] do
-      get 'questions', to: 'questions#user_index', as: 'questions'
-    end
+    resources :questions, only: [:show, :index, :create], shallow: true   
+    
+    post 'questions/:question_id/answers/:answer_id/vote', to: 'votes#create', as: 'question_answer_votes'
+
+    get 'users/:id/questions', to: 'questions#created_questions_index', as: 'created_questions'
+    get 'users/:id/answered_questions', to: 'questions#answered_questions_index', as: 'answered_questions'
     post 'facebook_login', to: 'sessions#facebook_login'
 
   end
