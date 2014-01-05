@@ -1,5 +1,5 @@
 object @question
-attributes :id, :content, :votes_count
+extends('api/questions/question')
 child(:answers, object_root: false) do
 	extends('api/answers/answer')
 end

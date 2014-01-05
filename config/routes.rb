@@ -4,8 +4,8 @@ Disputed::Application.routes.draw do
   namespace :api do
     resources :sessions, only: [:create]
     resources :questions, only: [:show, :index, :create], shallow: true   
-    
-    post 'questions/:question_id/answers/:answer_id/vote', to: 'votes#create', as: 'question_answer_votes'
+
+    post 'questions/:question_id/answers/:answer_id/votes', to: 'votes#create', as: 'question_answer_votes'
 
     get 'users/:id/questions', to: 'questions#created_questions_index', as: 'created_questions'
     get 'users/:id/answered_questions', to: 'questions#answered_questions_index', as: 'answered_questions'
