@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 # Authenticate fb tokens for mobile app
 gem 'fb_graph'
 
+# Token authentication
+# gem 'simple_token_authentication'
+
 gem 'therubyracer'
 
 gem 'cancan'

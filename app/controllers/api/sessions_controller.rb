@@ -11,6 +11,7 @@ class Api::SessionsController < Api::ProtectedResourceController
 			resource.ensure_authentication_token!					
 			@user = resource
 		else
+			warden.custom_failure!
 			render_invalid_login
 		end
 	end

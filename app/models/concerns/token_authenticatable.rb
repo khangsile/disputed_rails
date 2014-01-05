@@ -1,3 +1,4 @@
+
 module TokenAuthenticatable
 	extend ActiveSupport::Concern
 
@@ -9,7 +10,7 @@ module TokenAuthenticatable
 
   # Ensure the activerecord has an authentication token
   # The activerecord is not saved to the database
-	def ensure_authentication_token
+  def ensure_authentication_token
     self.authentication_token = generate_authentication_token if authentication_token.blank?
   end
 
@@ -24,7 +25,7 @@ module TokenAuthenticatable
   def ensure_authentication_token!
     reset_authentication_token! if authentication_token.blank?
   end
- 
+
   private
   
   # Generate an authentication token  
@@ -34,4 +35,5 @@ module TokenAuthenticatable
       break token unless User.where(authentication_token: token).first
     end
   end
+
 end
