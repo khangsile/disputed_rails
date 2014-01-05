@@ -1,6 +1,3 @@
 object @question
-extends('api/questions/question')
-child(:answers, object_root: false) do
-	extends('api/answers/answer')
-end
+extends('api/questions/question_base')
 node(:answered) { true }
