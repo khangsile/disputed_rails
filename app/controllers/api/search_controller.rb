@@ -1,7 +1,7 @@
 class Api::SearchController < Api::ProtectedResourceController
 
 	def create
-		@questions = Question.search search_params
+		@questions = Question.search search_params[:query]
 		render 'api/questions/index'
 	end
 
