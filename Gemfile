@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 # Authenticate fb tokens for mobile app
 gem 'fb_graph'
 
+gem 'pg_search'
+
 # Token authentication
 # gem 'simple_token_authentication'
 

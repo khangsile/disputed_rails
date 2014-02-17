@@ -1,4 +1,6 @@
 class Question < ActiveRecord::Base
+	include PgSearch
+
 	belongs_to :category
 	has_many :answers, dependent: :destroy
 
@@ -9,6 +11,17 @@ class Question < ActiveRecord::Base
 	validate :content, presence: true
 
 	scope :ordered_by_trend, -> { order("hot(votes_count, 0, created_at) DESC") }
+
+	pg_search_scope :search,
+  against: :search_vector,
+  using: {
+    tsearch: {
+      dictionary: 'english',
+      any_word: true,
+      prefix: true,
+      tsvector_column: 'search_vector'
+    }
+  }
 
 	def map_display
 		temp_map = Vote.joins(:user).where(question_id: self.id).count(group: [:answer_id,"users.state"])

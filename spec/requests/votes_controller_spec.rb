@@ -24,7 +24,7 @@ describe "VotesController" do
 
 		it "should increase answer's vote count" do
 			create_vote(answer.question,answer)
-			expect{answer.reload}.to change(answer,:votes_count).by(1)
+			expect{answer.reloade}.to change(answer,:votes_count).by(1)
 		end
 	end
 

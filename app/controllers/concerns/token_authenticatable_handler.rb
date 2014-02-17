@@ -1,5 +1,5 @@
 module TokenAuthenticatableHandler
-	# extend ActiveSupport::Concern
+	extend ActiveSupport::Concern
 
 	def authenticate_user_from_token!
     # Set the authentication token params if not already present,
