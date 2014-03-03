@@ -40,9 +40,10 @@ class Api::SessionsController < Api::ProtectedResourceController
 
 	def fb_params(user)
 		fb = user.raw_attributes
-		hometown = fb[:location][:name].split(',')
+		hometown = fb[:location] && fb[:location][:name].split(',')
 		[first_name: fb[:first_name], last_name: fb[:last_name], email: fb[:email],
-			city: hometown[0].strip, state: hometown[1].strip, password: Devise.friendly_token[0,20]]
+			city: hometown && hometown[0].strip, state: hometown && hometown[1].strip, 
+			password: Devise.friendly_token[0,20]]
 	end
 
 
