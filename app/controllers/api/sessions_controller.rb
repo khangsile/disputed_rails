@@ -19,9 +19,9 @@ class Api::SessionsController < Api::ProtectedResourceController
 	def facebook_login
 		# token = JSON.parse(request.env['omniauth_token']);
 		# token = fb[:credentials][:token]
-		logger.debug request.headers['OAUTH']
+		# logger.debug request.headers['OAUTH']
 		fb_user = FbGraph::User.me(request.headers['OAUTH']).fetch
-		logger.info fb_user.to_yaml
+		# logger.info fb_user.to_yaml
 		render_invalid_login and return if fb_user.blank?
 		@user = User.find_by(email: fb_user.email)
 		if @user.nil?
@@ -41,6 +41,7 @@ class Api::SessionsController < Api::ProtectedResourceController
 	def fb_params(user)
 		fb = user.raw_attributes
 		hometown = fb[:location] && fb[:location][:name].split(',')
+		logger.fin 'hometown is nil' if hometown.nil?
 		[first_name: fb[:first_name], last_name: fb[:last_name], email: fb[:email],
 			city: hometown && hometown[0].strip, state: hometown && hometown[1].strip, 
 			password: Devise.friendly_token[0,20]]
