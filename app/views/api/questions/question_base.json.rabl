@@ -1,4 +1,4 @@
-object @question, object_root: false
+object @question
 attributes :id, :content, :votes_count
 node(:map) { |q| q.map_display }
 child(:answers, object_root: false) do
