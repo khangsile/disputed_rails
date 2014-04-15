@@ -3,7 +3,8 @@ class Api::VotesController <  Api::ProtectedResourceController
 
 	def create
 		Vote.create!(user_id: current_user.id, question_id: params[:question_id], answer_id: params[:answer_id])
-		@answers = Answer.where(question_id: params[:question_id])
+		# @answers = Answer.where(question_id: params[:question_id])
+		@question = Question.where question_id: params[:question_id]
 		render 'api/questions/question_with_stats'
 	end
 
