@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'omniauth'
+gem 'omniauth-facebook'
+
 # Authenticate fb tokens for mobile app
 gem 'fb_graph'
 

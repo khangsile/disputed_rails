@@ -7,6 +7,7 @@ Disputed::Application.routes.draw do
 
     post 'questions/:question_id/answers/:answer_id/votes', to: 'votes#create', as: 'question_answer_votes'
     post 'search', to: 'search#create'
+    post 'questions/:question_id/votes/favorite', to: 'votes#favorite', as: 'question_favorite'
 
     get 'users/:id/questions', to: 'questions#created_questions_index', as: 'created_questions'
     get 'users/:id/answered_questions', to: 'questions#answered_questions_index', as: 'answered_questions'
